@@ -1,0 +1,14 @@
+# dependencies
+node_modules
+
+# environment variables
+.env
+
+# user uploads
+uploads/
+
+# Google Cloud service account keys
+*-credentials.json
+
+# logs
+npm-debug.log*
