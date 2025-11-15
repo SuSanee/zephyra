@@ -12,7 +12,6 @@ import authService from '../services/authService';
  * - breathingExercise: Logged when user completes a breathing exercise
  * - reflection: Logged when user creates a reflection entry
  * - mindCanvas: Logged when user creates and analyzes a drawing
- * - forumPost: Logged when user successfully posts in the support forum
  * - chatSession: Logged once per chat session per day (prevents multiple message spam)
  * 
  * Logging Strategy:
@@ -36,7 +35,6 @@ const StreakTracker = ({ isOpen, onClose }) => {
     breathingExercise: 0,
     reflection: 0,
     mindCanvas: 0,
-    forumPost: 0,
     chatSession: 0
   });
   const [history, setHistory] = useState([]);
@@ -158,7 +156,6 @@ const StreakTracker = ({ isOpen, onClose }) => {
       breathingExercise: 0,
       reflection: 0,
       mindCanvas: 0,
-      forumPost: 0,
       chatSession: 0
     };
 
@@ -184,7 +181,6 @@ const StreakTracker = ({ isOpen, onClose }) => {
       breathingExercise: '🫁',
       reflection: '📝',
       mindCanvas: '🎨',
-      forumPost: '💭',
       chatSession: '🤖'
     };
     return icons[type] || '⭐';
@@ -198,7 +194,6 @@ const StreakTracker = ({ isOpen, onClose }) => {
       breathingExercise: 'Breathing Exercises',
       reflection: 'Reflections',
       mindCanvas: 'Mind Canvas',
-      forumPost: 'Forum Posts',
       chatSession: 'Chat Sessions'
     };
     return names[type] || type.replace(/([A-Z])/g, ' $1').trim();
@@ -212,7 +207,6 @@ const StreakTracker = ({ isOpen, onClose }) => {
       breathingExercise: '#10B981', // Green
       reflection: '#F59E0B',       // Amber
       mindCanvas: '#EC4899',       // Pink
-      forumPost: '#06B6D4',        // Cyan
       chatSession: '#6366F1'       // Indigo
     };
     return colors[type] || '#6B7280';
@@ -244,7 +238,6 @@ const StreakTracker = ({ isOpen, onClose }) => {
       breathingExercise: 0,
       reflection: 0,
       mindCanvas: 0,
-      forumPost: 0,
       chatSession: 0
     };
 

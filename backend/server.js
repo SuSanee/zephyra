@@ -1,19 +1,9 @@
 const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: ['http://localhost:3000', 'https://zephyra-cbe14.web.app', 'https://zephyra.anujprojects.in', 'https://zephyra.shantanuprojects.in', 'https://zephyra.anshika.tech'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true
-  }
-});
 
 const PORT = process.env.PORT || 5000;
 
@@ -43,10 +33,6 @@ const authRoutes = require('./routes/auth');
 const chatRoutes = require('./routes/chat');
 const sessionRoutes = require('./routes/sessions');
 const canvasRoutes = require('./routes/canvas');
-const forumRoutes = require('./routes/forum');
-
-// Import Socket.IO handlers
-const { setupForumHandlers } = require('./socket/forumHandlers');
 
 // Routes
 app.get('/', (req, res) => {
@@ -74,13 +60,7 @@ app.use('/api/sessions', sessionRoutes);
 // Use canvas routes
 app.use('/api/canvas', canvasRoutes);
 
-// Use forum routes
-app.use('/api/forum', forumRoutes);
-
-// Initialize Socket.IO handlers
-setupForumHandlers(io);
-
 // Start server
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   // Server running
 });

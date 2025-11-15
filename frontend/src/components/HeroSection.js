@@ -226,16 +226,6 @@ const HeroSection = () => {
             </div>
 
             <div className="dashboard-card group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl backdrop-blur-sm border border-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-2" style={{ background: 'rgba(255, 255, 255, 0.8)' }}>
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 sm:mb-4 mx-auto" style={{ background: 'linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%)' }}>
-                <svg className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" fill="none" stroke="#E65100" viewBox="0 0 24 24" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                </svg>
-              </div>
-              <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-center" style={{ color: '#1E252B' }}>Anonymous Community Forum</h3>
-              <p className="text-xs sm:text-sm font-light text-center" style={{ color: '#475569' }}>Share without fear. Connect with real people who understand, heal together - completely anonymously. <strong>Gemini</strong> acts as a <strong>moderator</strong> & keeps every conversation safe and judgment-free.</p>
-            </div>
-
-            <div className="dashboard-card group p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl backdrop-blur-sm border border-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-2" style={{ background: 'rgba(255, 255, 255, 0.8)' }}>
               <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 sm:mb-4 mx-auto" style={{ background: 'linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%)' }}>
                 <img
                   src="/Google_Gemini_logo.png"
@@ -254,7 +244,7 @@ const HeroSection = () => {
                 </svg>
               </div>
               <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2 sm:mb-3 text-center" style={{ color: '#1E252B' }}>Privacy First</h3>
-              <p className="text-xs sm:text-sm font-light text-center" style={{ color: '#475569' }}>Built on <strong>Google Firebase</strong> for <strong>anonymous authentication</strong> - no personal info required. Your data is encrypted, forum interactions are pseudonymous, and your identity stays protected.</p>
+              <p className="text-xs sm:text-sm font-light text-center" style={{ color: '#475569' }}>Built on <strong>Google Firebase</strong> for <strong>anonymous authentication</strong> - no personal info required. Your data is encrypted and your identity stays protected.</p>
             </div>
           </div>
         </div>
@@ -351,7 +341,7 @@ const HeroSection = () => {
                   </p>
                 </div>
                 <p className="text-xs sm:text-sm text-center font-light leading-relaxed flex-grow" style={{ color: '#475569' }}>
-                  Crafting beautiful, responsive UIs with React.js and implemented AI moderation with Gemini and canvas analysis for safe community interactions
+                  Crafting beautiful, responsive UIs with React.js and implemented AI-powered canvas analysis with Gemini
                 </p>
               </div>
             </div>
@@ -419,7 +409,7 @@ const HeroSection = () => {
                   </p>
                 </div>
                 <p className="text-xs sm:text-sm text-center font-light leading-relaxed flex-grow" style={{ color: '#475569' }}>
-                  Developing secure Firebase authentication and real-time forum features with Socket.IO-keeping users safe & connected
+                  Developing secure Firebase authentication-keeping users safe & connected
                 </p>
               </div>
             </div>
@@ -513,8 +503,6 @@ const HeroSection = () => {
                 <section>
                   <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#1E252B' }}>How We Protect Your Data</h3>
                   <ul className="list-disc list-inside space-y-2 font-light leading-relaxed">
-                    <li><strong>Pseudonymous Identities:</strong> In the community forum, we assign you a unique pseudonym to protect your real identity.</li>
-                    <li><strong>AI Moderation:</strong> All forum posts are moderated by <strong>Gemini AI</strong> to ensure a safe, supportive environment.</li>
                     <li><strong>Secure Storage:</strong> All data is encrypted and stored securely using industry-standard practices.</li>
                     <li><strong>No Third-Party Sharing:</strong> Your data is never sold or shared with third parties for marketing purposes.</li>
                   </ul>
@@ -593,7 +581,6 @@ const HeroSection = () => {
                     <li><strong>AI Chatbot:</strong> Powered by <strong>Gemini 2.5 Flash</strong> for empathetic conversations.</li>
                     <li><strong>Mood Canvas:</strong> Visual expression analysis using <strong>Gemini Vision</strong>.</li>
                     <li><strong>Personalized Sessions:</strong> Custom therapy experiences with <strong>Google Lyria</strong> music and <strong>Imagen-3</strong> visuals.</li>
-                    <li><strong>Anonymous Community Forum:</strong> Moderated by <strong>Gemini AI</strong> with pseudonymous identities.</li>
                     <li><strong>Reflections & Insights:</strong> AI-powered commentary on your daily reflections.</li>
                   </ul>
                 </section>
@@ -608,7 +595,6 @@ const HeroSection = () => {
                 <section>
                   <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#1E252B' }}>User Responsibilities</h3>
                   <ul className="list-disc list-inside space-y-2 font-light leading-relaxed">
-                    <li>Be respectful and kind in community interactions.</li>
                     <li>Do not share harmful, abusive, or inappropriate content.</li>
                     <li>Understand that AI responses are generated and may not always be perfect.</li>
                     <li>Use the platform responsibly and in accordance with these terms.</li>

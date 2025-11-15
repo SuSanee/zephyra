@@ -61,11 +61,6 @@ const Dashboard = () => {
       action: () => setShowReflectionChart(true),
     },
     {
-      icon: "👥",
-      text: "Visit the support forum",
-      action: () => navigate("/forum"),
-    },
-    {
       icon: "📅",
       text: "Schedule a wellness session",
       action: () => navigate("/sessions"),
@@ -459,7 +454,7 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {/* AI Companion */}
           <div
             className="dashboard-card group p-4 sm:p-6 rounded-xl sm:rounded-2xl backdrop-blur-sm border border-white/40 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 relative"
@@ -645,103 +640,6 @@ const Dashboard = () => {
               }}
             >
               Manage Sessions
-            </button>
-          </div>
-
-          {/* Support Forum */}
-          <div
-            id="support-forum-section"
-            className={`dashboard-card group p-6 rounded-2xl backdrop-blur-sm border transition-all duration-300 hover:-translate-y-2 relative scroll-mt-8 ${highlightedCard === "support-forum"
-                ? "border-cyan-400 shadow-2xl ring-4 ring-cyan-300/50 animate-pulse"
-                : "border-white/40 hover:shadow-xl"
-              }`}
-            style={{ background: "rgba(255, 255, 255, 0.8)" }}
-          >
-            {/* Info Icon with Tooltip */}
-            <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10">
-              <div className="relative group/info">
-                <button
-                  className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center transition-all duration-200 hover:bg-gray-100 active:scale-95"
-                  style={{ color: "#3C91C5" }}
-                  aria-label="AI-Moderated Forum information"
-                >
-                  <svg
-                    className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2.5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </button>
-                {/* Tooltip */}
-                <div className="absolute top-full left-0 mt-2 w-56 sm:w-64 md:w-72 opacity-0 invisible group-hover/info:opacity-100 group-hover/info:visible transition-all duration-200 pointer-events-none z-20">
-                  <div
-                    className="bg-gray-900 text-white text-xs sm:text-sm rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 shadow-xl"
-                    style={{
-                      background: "rgba(30, 37, 43, 0.95)",
-                      backdropFilter: "blur(8px)",
-                    }}
-                  >
-                    <p className="leading-relaxed">
-                      Share your thoughts pseudonymously and connect with a supportive community of likeminded people.
-                    </p>
-                    {/* Tooltip arrow */}
-                    <div
-                      className="absolute -top-1.5 left-3 sm:left-4 w-3 h-3 transform rotate-45"
-                      style={{ background: "rgba(30, 37, 43, 0.95)" }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mb-3 sm:mb-4 mx-auto"
-              style={{
-                background: "linear-gradient(135deg, #3C91C5 0%, #5A7D95 100%)",
-              }}
-            >
-              <svg
-                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
-                fill="none"
-                stroke="white"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-                />
-              </svg>
-            </div>
-            <h3
-              className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-1 sm:mb-2 md:mb-3 text-center"
-              style={{ color: "#1E252B" }}
-            >
-              AI-Moderated Forum
-            </h3>
-            <p
-              className="text-xs sm:text-sm font-light text-center mb-3 sm:mb-4"
-              style={{ color: "#475569" }}
-            >
-              Post pseudonymously and get support from a community of like-minded individuals
-            </p>
-            <button
-              onClick={() => navigate("/forum")}
-              className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 hover:shadow-lg"
-              style={{
-                background: "linear-gradient(135deg, #3C91C5 0%, #5A7D95 100%)",
-                color: "white",
-              }}
-            >
-              Join Community
             </button>
           </div>
 
@@ -1641,8 +1539,6 @@ const Dashboard = () => {
                 <section>
                   <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#1E252B' }}>How We Protect Your Data</h3>
                   <ul className="list-disc list-inside space-y-2 font-light leading-relaxed">
-                    <li><strong>Pseudonymous Identities:</strong> In the community forum, we assign you a unique pseudonym to protect your real identity.</li>
-                    <li><strong>AI Moderation:</strong> All forum posts are moderated by <strong>Gemini AI</strong> to ensure a safe, supportive environment.</li>
                     <li><strong>Secure Storage:</strong> All data is encrypted and stored securely using industry-standard practices.</li>
                     <li><strong>No Third-Party Sharing:</strong> Your data is never sold or shared with third parties for marketing purposes.</li>
                   </ul>
@@ -1721,7 +1617,6 @@ const Dashboard = () => {
                     <li><strong>AI Chatbot:</strong> Powered by <strong>Gemini 2.5 Flash</strong> for empathetic conversations.</li>
                     <li><strong>Mood Canvas:</strong> Visual expression analysis using <strong>Gemini Vision</strong>.</li>
                     <li><strong>Personalized Sessions:</strong> Custom therapy experiences with <strong>Google Lyria</strong> music and <strong>Imagen-3</strong> visuals.</li>
-                    <li><strong>Anonymous Community Forum:</strong> Moderated by <strong>Gemini AI</strong> with pseudonymous identities.</li>
                     <li><strong>Reflections & Insights:</strong> AI-powered commentary on your daily reflections.</li>
                   </ul>
                 </section>
@@ -1736,7 +1631,6 @@ const Dashboard = () => {
                 <section>
                   <h3 className="text-lg sm:text-xl font-bold mb-2" style={{ color: '#1E252B' }}>User Responsibilities</h3>
                   <ul className="list-disc list-inside space-y-2 font-light leading-relaxed">
-                    <li>Be respectful and kind in community interactions.</li>
                     <li>Do not share harmful, abusive, or inappropriate content.</li>
                     <li>Understand that AI responses are generated and may not always be perfect.</li>
                     <li>Use the platform responsibly and in accordance with these terms.</li>

@@ -61,11 +61,6 @@ A comprehensive mental health and wellness platform built with the MERN stack, f
 - **Activity Tracking**: Monitor user engagement and wellness activities
 - **Reflection Management**: Store and manage user reflections and insights
 
-### 🗣️ AI Moderated Support Forum (NEW!)
-- **Anonymous Peer Support**: Participate in a safe, anonymous community forum for sharing thoughts and seeking support.
-- **AI Moderation**: All forum messages are automatically reviewed by AI; only supportive or constructive posts are allowed, while inappropriate content is rejected in real time.
-- **Community Connection**: Post, reply, and react with peace-of-mind knowing your privacy and safety are protected.
-
 ### 🎨 Modern UI/UX
 - **Responsive Design**: Works on desktop and mobile devices
 - **TailwindCSS**: Modern, clean styling
@@ -242,17 +237,12 @@ Backend (Node.js/Express)
 ```
 zephyra/
 ├─ backend/
-│  ├─ models/              # MongoDB models (User, Chat, Session, ForumPost)
+│  ├─ models/              # MongoDB models (User, Chat, Session)
 │  ├─ routes/              # API routes
 │  │  ├─ auth.js           # Authentication routes
 │  │  ├─ chat.js           # Chat routes
 │  │  ├─ sessions.js       # Session routes
-│  │  ├─ canvas.js         # Mind Canvas routes (NEW!)
-│  │  ├─ forum.js          # AI Moderated Support Forum routes (NEW!)
-│  ├─ services/            # Business logic services (includes moderationService.js)
-│  ├─ socket/
-│  │  └─ forumHandlers.js  # Forum real-time handlers (AI moderation)
-│  ├─ utils/               # Utility functions (pseudonymGenerator, etc.)
+│  │  └─ canvas.js         # Mind Canvas routes (NEW!)
 │  ├─ config/              # Firebase configuration
 │  ├─ uploads/             # Audio file storage
 │  ├─ server.js            # Express server
@@ -266,7 +256,6 @@ zephyra/
 │  │  │  ├─ Dashboard.js   # Includes activity suggestion companion bot (NEW!)
 │  │  │  ├─ SessionInterface.js
 │  │  │  ├─ MindCanvas.js  # Mind Canvas component (NEW!)
-│  │  │  ├─ Forum.js       # Forum component (NEW!)
 │  │  │  └─ ...
 │  │  ├─ contexts/         # React contexts
 │  │  ├─ hooks/            # Custom React hooks
@@ -285,7 +274,7 @@ MongoDB Collections:
 ├── users
 │   ├── firebaseUid (String, Unique, Indexed)
 │   ├── secretCode (String, Unique, Indexed)
-│   ├── pseudonym (String, Unique, Sparse Index - Anonymous forum display name)
+│   ├── pseudonym (String, Unique, Sparse Index - legacy field, kept for existing data)
 │   ├── nickname (String)
 │   ├── ageRange (String, Enum: 13-17, 18-25, 26-35, 36-50, 51+)
 │   ├── goals (Array of Strings)
@@ -303,7 +292,7 @@ MongoDB Collections:
 │   │   ├── date (Date, Default: Date.now)
 │   │   └── geminiComment (String, Optional - AI-generated appreciation)
 │   ├── activityHistory (Array of Objects)
-│   │   ├── type (String, Required, Enum: moodCheckIn, therapyVisit, breathingExercise, reflection, mindCanvas, forumPost, chatSession)
+│   │   ├── type (String, Required, Enum: moodCheckIn, therapyVisit, breathingExercise, reflection, mindCanvas, chatSession; forumPost kept for existing data)
 │   │   └── date (Date, Default: Date.now)
 │   ├── userContext (Object - AI session context)
 │   │   ├── cumulativeSessionSummary (String, Optional)
@@ -325,50 +314,32 @@ MongoDB Collections:
 │   ├── isActive (Boolean, Default: true)
 │   ├── createdAt (Date, Default: Date.now)
 │   └── updatedAt (Date, Default: Date.now)
-├── sessions
-│   ├── firebaseUid (String, Required, Indexed)
-│   ├── sessionId (String, Required, Unique)
-│   ├── schedule (Object)
-│   │   ├── frequency (String, Enum: daily, weekly, monthly)
-│   │   ├── time (String, Required, Format: HH:MM)
-│   │   ├── days (Array of Strings, Enum: monday-sunday)
-│   │   └── timezone (String, Default: UTC)
-│   ├── status (String, Enum: scheduled, active, completed, cancelled, missed)
-│   ├── sessionData (Object)
-│   │   ├── backgroundImage (String, Optional)
-│   │   ├── backgroundPrompt (String, Optional)
-│   │   ├── backgroundMusic (String, Optional)
-│   │   ├── musicPrompt (String, Optional)
-│   │   ├── generatedWith (String, Optional - "Imagen 3" for images)
-│   │   ├── musicGeneratedWith (String, Optional - "Lyria 2")
-│   │   ├── greeting (String, Optional)
-│   │   ├── moodCheckIn (Object, Optional)
-│   │   ├── exploration (Array of Objects)
-│   │   ├── copingTool (Object, Optional)
-│   │   ├── reflection (Object, Optional)
-│   │   └── closure (Object, Optional)
-│   ├── nextSessionDate (Date, Required)
-│   ├── lastSessionSummary (String, Optional)
-│   ├── completedAt (Date, Optional)
-│   ├── createdAt (Date, Default: Date.now)
-│   └── updatedAt (Date, Default: Date.now)
-└── forumposts
-    ├── postId (String, Required, Unique, Indexed)
+└── sessions
     ├── firebaseUid (String, Required, Indexed)
-    ├── pseudonym (String, Required - Anonymous display name)
-    ├── content (String, Required, maxlength: 2000)
-    ├── comments (Array of Comment Objects)
-    │   ├── commentId (String, Required)
-    │   ├── firebaseUid (String, Required, Indexed)
-    │   ├── pseudonym (String, Required)
-    │   ├── content (String, Required, maxlength: 1000)
-    │   ├── parentCommentId (String, Optional, Indexed - for nested replies)
-    │   ├── replyCount (Number, Default: 0)
-    │   ├── createdAt (Date, Default: Date.now)
-    │   └── isModerated (Boolean, Default: true)
-    ├── commentCount (Number, Default: 0)
-    ├── isModerated (Boolean, Default: true)
-    ├── createdAt (Date, Default: Date.now, Indexed)
+    ├── sessionId (String, Required, Unique)
+    ├── schedule (Object)
+    │   ├── frequency (String, Enum: daily, weekly, monthly)
+    │   ├── time (String, Required, Format: HH:MM)
+    │   ├── days (Array of Strings, Enum: monday-sunday)
+    │   └── timezone (String, Default: UTC)
+    ├── status (String, Enum: scheduled, active, completed, cancelled, missed)
+    ├── sessionData (Object)
+    │   ├── backgroundImage (String, Optional)
+    │   ├── backgroundPrompt (String, Optional)
+    │   ├── backgroundMusic (String, Optional)
+    │   ├── musicPrompt (String, Optional)
+    │   ├── generatedWith (String, Optional - "Imagen 3" for images)
+    │   ├── musicGeneratedWith (String, Optional - "Lyria 2")
+    │   ├── greeting (String, Optional)
+    │   ├── moodCheckIn (Object, Optional)
+    │   ├── exploration (Array of Objects)
+    │   ├── copingTool (Object, Optional)
+    │   ├── reflection (Object, Optional)
+    │   └── closure (Object, Optional)
+    ├── nextSessionDate (Date, Required)
+    ├── lastSessionSummary (String, Optional)
+    ├── completedAt (Date, Optional)
+    ├── createdAt (Date, Default: Date.now)
     └── updatedAt (Date, Default: Date.now)
 ```
 
@@ -412,13 +383,6 @@ MongoDB Collections:
 - `POST /api/canvas/analyze` - Analyze canvas drawing with AI
 - `GET /api/canvas/history/:firebaseUid` - Get canvas drawing history
 
-### AI Moderated Support Forum
-- `GET /api/forum/posts?page=1&limit=20` - Get paginated forum posts
-- `GET /api/forum/posts/:postId` - Get a specific forum post and comments
-- `POST /api/forum/posts` - Create a new post (AI-moderated)
-- `POST /api/forum/posts/:postId/comments` - Add a comment to a post (AI-moderated)
-- **Real-time Updates**: Forum uses Socket.io for live post updates, reactions, and new comments
-
 ## 🎨 Key Components
 
 ### Frontend Components
@@ -439,13 +403,11 @@ MongoDB Collections:
 - **HeroSection**: Landing page hero section
 - **SecretCodeModal**: Secret code validation modal
 - **InstallPrompt**: PWA installation prompt with platform-specific guidance
-- **Forum**: Community forum interface for anonymous, AI-moderated peer support (NEW!)
 
 ### Backend Models
 - **User**: User profiles, mood history, reflections
 - **Chat**: Conversation history and context
 - **Session**: Wellness session management and data
-- **ForumPost**: Forum posts, comments, and reactions
 
 ## 🛠️ Technology Stack
 
@@ -459,7 +421,6 @@ MongoDB Collections:
 - **Imagen 3** (via Vertex AI) for AI-generated nature scene backgrounds in therapy sessions (NEW)
 - **Lyria-002** (via Vertex AI) for AI-composed therapeutic background music (NEW)
 - **Firebase Admin** (v12.7.0) for authentication
-- **Socket.io** (v4.8.1) for real-time forum updates
 - **Multer** (v2.0.2) for file uploads
 - **CORS** (v2.8.5) for cross-origin requests
 - **Axios** (v1.12.2) for HTTP requests
@@ -470,7 +431,6 @@ MongoDB Collections:
 - **TailwindCSS** (v3.4.18) for styling
 - **Framer Motion** (v12.23.13) for animations
 - **Firebase** (v12.2.1) for authentication
-- **Socket.io Client** (v4.8.1) for real-time updates
 - **Axios** (v1.12.2) for API calls
 - **React Router DOM** (v7.9.1) for navigation
 - **Heroicons** (@heroicons/react v2.2.0) for icons
@@ -484,7 +444,6 @@ MongoDB Collections:
 - **Secure MongoDB** connections with authentication
 - **API key protection** and secure credential management
 - **File upload validation** with size limits and type restrictions
-- **AI Content Moderation** for forum posts to ensure safe community interactions
 
 ## 📱 Usage
 
@@ -534,14 +493,6 @@ MongoDB Collections:
 8. All canvas moods are automatically saved to your mood history
 
 
-### Participating in the AI Moderated Support Forum 🗣️
-1. Navigate to the Forum tab from your dashboard navigation.
-2. Choose to post, reply, or read anonymously-no sign-in details are shown to peers.
-3. Compose your message. Upon submitting, Zephyra AI checks each post for supportive/constructive intent:
-   - Supportive messages are posted instantly and visible to the community.
-   - Harmful or inappropriate posts are automatically blocked and rejected, keeping the space safe.
-4. React to and reply to community posts, growing a meaningful conversation!
-
 ### Session Personalization
 - Each therapy session features a dynamically created nature background image (via Imagen 3) and AI-composed instrumental music (via Lyria-002) personalized to your mood and preferences.
 
@@ -575,9 +526,7 @@ The platform currently includes:
 - **User authentication** and profile management with anonymous Firebase auth
 - **Personalized AI responses** based on user context and history
 - **Audio processing** with speech-to-text and text-to-speech (Cloud + Web APIs)
-- **AI Moderated Support Forum** – Anonymous, AI-powered community space for sharing and peer support (NEW!)
 - **Progressive Web App (PWA)** - Installable on all devices
-- **Real-time updates** with Socket.io for forum interactions
 - **Cross-platform compatibility** - Works seamlessly on iOS, Android, Chrome, Firefox, Safari, and Edge
 
 ## 🔮 Future Development
@@ -587,7 +536,7 @@ Potential areas for expansion:
 - More detailed analytics and reporting (weekly/monthly wellness reports)
 - Integration with external wellness services and resources
 - Enhanced session customization options
-- Community features expansion (group sessions, peer matching)
+- Peer support features (group sessions, peer matching)
 
 ## 📝 Scripts
 
@@ -634,11 +583,6 @@ Potential areas for expansion:
 6. **PWA installation issues**
    - Ensure app is served over HTTPS in production
    - Verify manifest.json is accessible
-
-7. **Forum real-time updates not working**
-   - Check Socket.io connection in browser DevTools
-   - Verify WebSocket support in browser
-   - Ensure CORS is properly configured for Socket.io
 
 ### Debug Mode
 Enable debug logging by setting `NODE_ENV=development` in your backend `.env` file.
